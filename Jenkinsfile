@@ -20,5 +20,6 @@ edgeXBuildDocker (
     mavenSettings: 'ci-build-images-settings',
     dockerImageName: 'robotframeworko',
     dockerNamespace: 'edgex-devops',
+    dockerNexusRepo: 'snapshots',
     dockerTags: [env.BUILD_NUMBER]
 )
