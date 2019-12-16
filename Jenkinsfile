@@ -20,5 +20,6 @@ edgeXBuildDocker (
     mavenSettings: 'ci-build-images-settings',
     dockerImageName: 'edgex-sonarqube',
     dockerNamespace: 'edgex-devops',
+    dockerNexusRepo: 'snapshots',
     dockerTags: [env.BUILD_NUMBER, "3.4.0.1729"]
 )
