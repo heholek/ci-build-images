@@ -20,5 +20,6 @@ edgeXBuildDocker (
     mavenSettings: 'ci-build-images-settings',
     dockerImageName: 'edgex-jmeter',
     dockerNamespace: 'edgex-devops',
+    dockerNexusRepo: 'snapshots',
     dockerTags: ["5.1"]
 )
