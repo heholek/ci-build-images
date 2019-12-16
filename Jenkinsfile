@@ -20,5 +20,6 @@ edgeXBuildDocker (
     mavenSettings: 'ci-build-images-settings',
     dockerImageName: 'edgex-snyk-go',
     dockerNamespace: 'edgex-devops',
+    dockerNexusRepo: 'snapshots',
     dockerTags: ["1.217.3"]
 )
