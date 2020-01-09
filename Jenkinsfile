@@ -21,5 +21,6 @@ edgeXBuildDocker (
     dockerImageName: 'edgex-jmeter',
     dockerNamespace: 'edgex-devops',
     dockerNexusRepo: 'snapshots',
-    dockerTags: ["5.1"]
+    dockerTags: ["5.1"],
+    releaseBranchOverride: 'jmeter'
 )
