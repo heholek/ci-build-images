@@ -7,6 +7,7 @@ This repository contains Docker images used within the EdgeX Jenkins pipeline pr
 
 - [Go 1.11.x](https://github.com/edgexfoundry/ci-build-images/tree/golang)
 - [Go 1.12.x](https://github.com/edgexfoundry/ci-build-images/tree/golang-1.12)
+- [Go 1.13.x](https://github.com/edgexfoundry/ci-build-images/tree/golang-1.13)
 - [gcc](https://github.com/edgexfoundry/ci-build-images/tree/gcc)
 - [lftools](https://github.com/edgexfoundry/ci-build-images/tree/lftools)
 - [klar](https://github.com/edgexfoundry/ci-build-images/tree/klar)
