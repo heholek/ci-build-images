@@ -20,5 +20,6 @@ edgeXBuildDocker (
     dockerImageName: 'edgex-docs-builder',
     dockerNamespace: 'edgex-devops',
     dockerNexusRepo: 'snapshots',
-    dockerTags: [env.BUILD_NUMBER]
+    dockerTags: [env.BUILD_NUMBER],
+    releaseBranchOverride: 'edgex-docs'
 )
