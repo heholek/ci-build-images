@@ -21,5 +21,6 @@ edgeXBuildDocker (
     dockerNamespace: 'edgex-devops',
     dockerBuildArgs: ['NEWMAN_VERSION=4.5.6'],
     dockerNexusRepo: 'snapshots',
-    dockerTags: ["4.5.6"]
+    dockerTags: ["4.5.6"],
+    releaseBranchOverride: 'newman'
 )
