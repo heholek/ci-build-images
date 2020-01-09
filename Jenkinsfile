@@ -14,12 +14,9 @@
 // limitations under the License.
 //
 
-loadGlobalLibrary()
-
 def image
 def logImage_amd64
 def logImage_arm64
-def changeDetected
 def mavenSettings = env.SILO == 'sandbox' ? 'sandbox-settings' : 'ci-build-images-settings'
 
 pipeline {
@@ -35,15 +32,10 @@ pipeline {
         stage('LF Prep') {
             steps {
                 edgeXSetupEnvironment()
-                script {
-                    changeDetected = edgex.didChange('lftools')
-                    println "Detected Change in LF Tools? ${changeDetected}"
-                }
             }
         }
 
         stage('Build Docker Image') {
-            when { expression { changeDetected } }
             parallel {
                 stage('amd64') {
                     agent {
@@ -61,7 +53,7 @@ pipeline {
                         }
 
                         stage('Docker Push') {
-                            when { expression { edgex.isReleaseStream() } }
+                            when { expression { env.GIT_BRANCH == 'lftools' } }
                             steps {
                                 script {
                                     docker.withRegistry("https://${env.DOCKER_REGISTRY}:10003") {
@@ -97,7 +89,7 @@ pipeline {
                         }
 
                         stage('Docker Push') {
-                            when { expression { edgex.isReleaseStream() } }
+                            when { expression { env.GIT_BRANCH == 'lftools' } }
                             steps {
                                 script {
                                     docker.withRegistry("https://${env.DOCKER_REGISTRY}:10003") {
@@ -114,7 +106,7 @@ pipeline {
         }
 
         stage('Clair Image Scan') {
-            when { expression { edgex.isReleaseStream() } }
+            when { expression { env.GIT_BRANCH == 'lftools' } }
             steps {
                 edgeXClair("${env.DOCKER_REGISTRY}:10003/edgex-lftools:0.23.1-centos7")
                 edgeXClair("${env.DOCKER_REGISTRY}:10003/edgex-lftools-log-publisher:amd64")
@@ -128,19 +120,4 @@ pipeline {
             edgeXInfraPublish()
         }
     }
-}
-
-def loadGlobalLibrary(branch = '*/master') {
-    library(identifier: 'edgex-global-pipelines@master',
-        retriever: legacySCM([
-            $class: 'GitSCM',
-            userRemoteConfigs: [[url: 'https://github.com/edgexfoundry/edgex-global-pipelines.git']],
-            branches: [[name: branch]],
-            doGenerateSubmoduleConfigurations: false,
-            extensions: [
-                [$class: 'SubmoduleOption', recursiveSubmodules: true],
-                [$class: 'IgnoreNotifyCommit']
-            ]
-        ])
-    )
 }
