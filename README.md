@@ -18,6 +18,7 @@ This repository contains Docker images used within the EdgeX Jenkins pipeline pr
 - [newman](https://github.com/edgexfoundry/ci-build-images/tree/newman)
 - [robotframework](https://github.com/edgexfoundry/ci-build-images/tree/robotframework)
 - [snyk](https://github.com/edgexfoundry/ci-build-images/tree/snyk)
+- [egp-unit-test](https://github.com/edgexfoundry/ci-build-images/tree/egp-unit-test)
 
 
 ## Switch the branch
