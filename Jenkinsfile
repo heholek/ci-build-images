@@ -19,5 +19,6 @@ edgeXBuildDocker (
     mavenSettings: 'ci-build-images-settings',
     dockerImageName: 'edgex-snap-builder',
     dockerNamespace: 'edgex-devops',
-    dockerNexusRepo: 'snapshots'
+    dockerNexusRepo: 'snapshots',
+    releaseBranchOverride: 'snapcraft-builder'
 )
