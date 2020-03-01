@@ -43,5 +43,3 @@ case "$JOB_TYPE" in
         popd > /dev/null
     ;;
 esac
-
-EOF
