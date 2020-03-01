@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
 # Allow specifying the architecture from the build arg command line (edgeXDocker.build passes this in)
-# https://github.com/edgexfoundry/edgex-global-pipelines/blob/master/vars/edgeXDocker.groovy#L39
-ARG arch
+# https://github.com/edgexfoundry/edgex-global-pipelines/blob/master/vars/edgeXDocker.groovy#L37
+ARG ARCH
 
 # The following snippet is essentially the same as the upstream dockerfile
 # here: https://github.com/snapcore/snapcraft/blob/master/docker/stable.Dockerfile
@@ -22,8 +22,8 @@ RUN apt-get update && \
   apt-get install --yes \
   curl sudo jq squashfs-tools && \
   for thesnap in core core18 snapcraft; do \
-  dlUrl=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $arch" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_url' -r); \
-  dlSHA=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $arch" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_sha512' -r); \
+  dlUrl=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_url' -r); \
+  dlSHA=$(curl -s -H 'X-Ubuntu-Series: 16' -H "X-Ubuntu-Architecture: $ARCH" "https://api.snapcraft.io/api/v1/snaps/details/$thesnap" | jq '.download_sha512' -r); \
   curl -s -L $dlUrl --output $thesnap.snap; \
   echo "$dlSHA $thesnap.snap"; \
   echo "$dlSHA $thesnap.snap" > $thesnap.snap.sha512; \
@@ -45,7 +45,7 @@ RUN apt-get update && \
 # above, try updating this Dockerfile to do same as whatever the upstream
 # docker image does
 ADD https://raw.githubusercontent.com/snapcore/snapcraft/25043ab3667d24688b3d93dcac9f9a74f35dae9e/docker/bin/snapcraft-wrapper /snap/bin/snapcraft
-RUN sed -i -e "s@\"amd64\"@$arch@" /snap/bin/snapcraft && chmod +x /snap/bin/snapcraft
+RUN sed -i -e "s@\"amd64\"@$ARCH@" /snap/bin/snapcraft && chmod +x /snap/bin/snapcraft
 
 # Snapcraft will be in /snap/bin, so we need to put that on the $PATH
 ENV PATH=/snap/bin:$PATH
